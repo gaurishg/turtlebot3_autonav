@@ -46,7 +46,7 @@ def done_callback(status: int, result: MoveBaseResult):
 
 
 def main():
-    rospy.init_node("qibitech_turtlebot3_house")
+    rospy.init_node("turtlebot3_house")
 
     # Set initial pose of robot using information from Gazebo
     pub = rospy.Publisher("/initialpose", PoseWithCovarianceStamped, queue_size=1)
