@@ -1,8 +1,11 @@
 <launch>
     <arg name="map_file" default="$(find turtlebot3_autonav)/maps/map.yaml" />
+    <arg name="open_rviz" default="false" />
+
     <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch"/>
     <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
         <arg name="map_file" value="$(arg map_file)"/>
+        <arg name="open_rviz" value="$(arg open_rviz)" />
     </include>
     <node name="turtlebot3_world" pkg="turtlebot3_autonav" type="move_turtlebot3_world.py"/>
 </launch>
