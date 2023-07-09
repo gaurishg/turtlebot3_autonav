@@ -8,6 +8,8 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseWithCovarianceStamped, Point, Quaternion
 import random
 
+
+# List of points where our robot can go
 positions = [
     Point(-7.25, -3.3, 0.0),
     Point(-5.75, -3.3, 0.0),
@@ -19,6 +21,7 @@ positions = [
     Point(6.0, -5.0, 0.0)
 ]
 
+# List of orientations
 quaternions = [
     Quaternion(0.0, 0.0, 0.0, 1.0), # UP
     Quaternion(0.0, 0.0, -1.0, 0.0), # DOWN
@@ -28,14 +31,24 @@ quaternions = [
 
 
 def active_callback():
+    """
+    Callback method to be called when the goal 
+    is received
+    """
     rospy.loginfo("Received the goal")
 
 def feedback_callback(feedback: MoveBaseFeedback):
+    """
+    Callback method to be called while the robot is in motion
+    """
     # print("feedback")
     # rospy.loginfo(feedback)
     ...
 
 def done_callback(status: int, result: MoveBaseResult):
+    """
+    Callback method to be called when the robot completes the goal
+    """
     if status == GoalStatus.SUCCEEDED:
         rospy.loginfo("Goal reached")
     elif status in (GoalStatus.PREEMPTED, GoalStatus.RECALLED):
@@ -46,6 +59,9 @@ def done_callback(status: int, result: MoveBaseResult):
 
 
 def main():
+    """
+    Entry point of our program
+    """
     rospy.init_node("turtlebot3_house")
 
     # Set initial pose of robot using information from Gazebo
